@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 
 interface NoteProps {
   id: string;
-  title: string;
-  content: string;
+  title?: string;
+  content?: string;
 }
 
 const Note: FunctionComponent<NoteProps> = ({
