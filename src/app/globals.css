@@ -113,3 +113,14 @@ section {
     @apply bg-red-100 border-red-400 text-red-700;
   }
 }
+
+.icon-delete {
+  @apply cursor-pointer fill-red-600;
+  svg {
+    &:hover,
+    &:focus,
+    &:active {
+      @apply fill-red-700;
+    }
+  }
+}

@@ -32,7 +32,7 @@ const Note = ({
       <div className="flex justify-end mt-auto">
       <button 
           onClick={handleDelete} 
-          className="cursor-pointer"
+          className="icon-delete"
           aria-label="Delete note"
         >
           <IconTrash width={24} height={24} className="mt-4" />
