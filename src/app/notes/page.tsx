@@ -39,11 +39,22 @@ export default async function NotesPage() {
       <>
         <section>
           <h1>Notes Page</h1>
-          <div className="flex flex-wrap gap-4">
-            {notes?.map((note) => {
-              return <Note key={note.id} note={note} />;
-            })}
-          </div>
+            {notes.length === 0 ? (
+              <>
+                <p>
+                  Please run in terminal: <code>$ ./pocketbase serve</code> to start the pocketbase db server.
+                </p>
+                <p>
+                  Then refresh page to see the list of notes.
+                </p>
+              </>
+            ) : (
+              <div className="flex flex-wrap gap-4">
+                  {notes.map((note) => (
+                      <Note key={note.id} note={note} />
+                  ))}
+              </div>
+            )}
         </section>
       </>
     );

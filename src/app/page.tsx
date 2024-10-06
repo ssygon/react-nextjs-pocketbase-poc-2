@@ -3,7 +3,7 @@ export default function Home() {
     <>
       <section>
         <h1>Home Page</h1>
-        <p>Please click the "Notes" link above</p>
+        <p>Please click the <strong>"Notes"</strong> link above</p>
       </section>
     </>
   );
