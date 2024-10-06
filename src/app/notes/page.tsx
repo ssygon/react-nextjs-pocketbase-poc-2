@@ -1,19 +1,6 @@
 import PocketBase from "pocketbase";
 
-function Note( { note }: any ) {
-    const {
-        id,
-        title,
-        content
-    } = note || {};
-
-    return (
-        <div className="border border-gray-200 rounded-lg shadow p-3">
-            <h2>{title}</h2>
-            <p>{content}</p>
-        </div>
-    );
-}
+import Note from "../components/Note/Note";
 
 async function getNotes() {
   try {
@@ -50,10 +37,10 @@ export default async function NotesPage() {
               </>
             ) : (
               <div className="flex flex-wrap gap-4">
-                  {notes.map((note) => (
-                      <Note key={note.id} note={note} />
-                  ))}
-              </div>
+              {notes.map((note) => (
+                  <Note key={note.id} id={note.id} title={note.title} content={note.content}/>
+              ))}
+          </div>
             )}
         </section>
       </>
