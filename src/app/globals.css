@@ -54,6 +54,7 @@ p {
 }
 
 input:focus-visible,
+textarea:focus-visible,
 button:focus-visible,
 a:focus-visible {
   outline: 2px solid blue;
@@ -61,7 +62,24 @@ a:focus-visible {
 }
 
 .btn {
-  @apply w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold border-blue-700 rounded py-2 px-4 mt-3 mb-3;
+  @apply w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold border-blue-700 rounded py-2 px-4;
+}
+
+.btn-cancel {
+  @apply w-full sm:w-auto bg-red-600 hover:bg-red-500 text-white font-bold rounded py-2 px-4;
+}
+
+form {
+  @apply w-full sm:max-w-lg bg-white rounded-lg m-4;
+}
+
+input,
+textarea {
+  @apply block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 outline-blue-500 p-2.5 mb-3;
+}
+
+.dialog {
+  @apply fixed inset-0 z-10 overflow-y-auto flex justify-center items-center bg-black bg-opacity-20;
 }
 
 code {

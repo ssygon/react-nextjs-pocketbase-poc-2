@@ -1,50 +1,45 @@
-import PocketBase from "pocketbase";
-
+import { isPocketbaseServerOnline, getNotes } from "@/app/notes/actions";
 import Note from "../components/Note/Note";
+import CreateNote from "../components/CreateNote/CreateNote";
 
-async function getNotes() {
-  try {
-      // const res = await fetch('http://127.0.0.1:8090/api/collections/notes/records?page=1&perPage=30', { cache: 'no-store' });  // no-store is important
-      // const data = await res.json();
-      const db = new PocketBase('http://127.0.0.1:8090');
-      const data = await db.collection('notes').getList(1, 30, { cache: 'no-store' });
+const NotesPage = async () => {
 
-      console.log(data);
-
-      return data?.items || [];
-    } catch (error) {
-      console.error('Error fetching notes:', error);
-      return [];
-    }    
-}
-
-
-export default async function NotesPage() {
+  let response = await isPocketbaseServerOnline();
+  if (!response) {
+    return (
+      <>
+        <section>
+          <h1>Notes Page</h1>
+          <p>
+            Please run in terminal: <code>$ ./pocketbase serve</code> to start the PocketBase DB server.
+          </p>
+          <p>
+            Then refresh the page to see the list of notes.
+          </p>
+        </section>
+      </>
+    );
+  }
+  else {
     const notes = await getNotes();
 
     return(
       <>
         <section>
           <h1>Notes Page</h1>
-            {notes.length === 0 ? (
-              <>
-                <p>
-                  Please run in terminal: <code>$ ./pocketbase serve</code> to start the pocketbase db server.
-                </p>
-                <p>
-                  Then refresh page to see the list of notes.
-                </p>
-              </>
-            ) : (
-              <div className="flex flex-wrap gap-4">
-              {notes.map((note) => (
+          <CreateNote />
+          <div className="grid gap-x-4 gap-y-4 grid-cols-2 mt-4 sm:grid-cols-3 md:grid-cols-4">
+            {notes.map((note) => (
                 // Use {...note} spread to simplify passing in multiple props instead of:
                 // <Note key={note.id} id={note.id} title={note?.title} content={note?.content}/>
                 <Note key={note.id} {...note}/>
-              ))}
+            ))}
           </div>
-            )}
         </section>
       </>
     );
+  }
+
 }
+
+export default NotesPage;
