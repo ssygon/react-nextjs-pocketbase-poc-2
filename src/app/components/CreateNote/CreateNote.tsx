@@ -7,7 +7,10 @@ const CreateNote = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
+
   const [creating, setCreating] = useState(false);
+  const [status, setStatus] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,9 +21,11 @@ const CreateNote = () => {
             content,
           };
 
-          // Add the note to the database
-          await addNote(record);
+          // Add the note to the database and get the status
+          const { status, message } = await addNote(record);
 
+          setStatus(status);
+          setMessage(message);
           setContent('');
           setTitle('');
 
@@ -54,6 +59,11 @@ const CreateNote = () => {
   return (
     <>
       <button className="btn" onClick={toggleDialog}>Add a Note</button>
+      {status && (
+        <div className={`message ${status ? 'success' : 'error'}`}>
+          {message}
+        </div>
+      )}
       {dialogOpen && (
         <div className="dialog">
           <form onSubmit={create}>

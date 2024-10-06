@@ -50,13 +50,15 @@ const getNotes = async () => {
 };
 
 // Add a new note in the database
-const addNote = async (data: any) => {
+const addNote = async (data: any): Promise<{ status: boolean; message: string }> => {
   try {
-    await notesCollection.create(data);
+    const status = await notesCollection.create(data);
     revalidatePath(notesPath); // Revalidate(update) the notes page
+    return { status: true, message: 'Note added successfully' };
   }
   catch (error) {
     console.error('Error adding a new note', error);
+    return { status: false, message: 'Failed to add note' };
   }
 };
 
