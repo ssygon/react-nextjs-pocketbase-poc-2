@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
-interface NoteProps {
+type NoteProps = {
   id: string;
   title?: string;
   content?: string;
-}
+};
 
 const Note: FunctionComponent<NoteProps> = ({
   id,
