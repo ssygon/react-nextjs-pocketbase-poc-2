@@ -33,12 +33,14 @@ export default async function NotesPage() {
 
     return(
       <>
-        <h1>Notes Page</h1>
-        <div className="flex flex-wrap gap-4">
-          {notes?.map((note) => {
-            return <Note key={note.id} note={note} />;
-          })}
-        </div>
+        <section>
+          <h1>Notes Page</h1>
+          <div className="flex flex-wrap gap-4">
+            {notes?.map((note) => {
+              return <Note key={note.id} note={note} />;
+            })}
+          </div>
+        </section>
       </>
     );
 }

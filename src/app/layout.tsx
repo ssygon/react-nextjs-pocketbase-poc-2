@@ -15,12 +15,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="p-3">
-          <nav className="ml-[-0.5rem] mr-[-0.5rem]">
-            <Link href="/" className="inline-flex px-2 py-3 font-bold hover:underline">
+        <main>
+          <nav>
+            <Link href="/" className="inline-flex font-bold hover:underline py-3 pl-0 pr-2">
               Home
             </Link>
-            <Link href="/notes" className="inline-flex px-2 py-3 font-bold hover:underline">
+            <Link href="/notes" className="inline-flex font-bold hover:underline py-3 px-2">
               Notes
             </Link>
           </nav>
