@@ -25,7 +25,7 @@ const Note = ({
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg shadow p-3">
+    <div className="flex flex-col border border-gray-200 rounded-lg shadow p-3">
       <h2>{title}</h2>
       <p>{content}</p>
       <div className="flex justify-end mt-auto">
