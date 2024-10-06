@@ -6,6 +6,9 @@ import PocketBase from "pocketbase";
 
 const db = new PocketBase(config.pocketbaseAPIBaseUrl);
 
+const notesCollection = db.collection('notes');
+const notesPath = "/notes";
+
 // Checks if the PocketBase server is running
 const isPocketbaseServerOnline = async () => {
   try {
@@ -37,7 +40,7 @@ const isPocketbaseServerOnline = async () => {
 // Get Notes
 const getNotes = async () => {
   try {
-    const data = await db.collection('notes').getList(1, 30, { cache: 'no-store' });
+    const data = await notesCollection.getList(1, 30, { cache: 'no-store' });
     console.log(data);
     return data?.items || [];
   } catch (error) {
@@ -49,8 +52,8 @@ const getNotes = async () => {
 // Add a new note in the database
 const addNote = async (data: any) => {
   try {
-    await db.collection("notes").create(data);
-    revalidatePath("/notes"); // Revalidate(update) the notes page
+    await notesCollection.create(data);
+    revalidatePath(notesPath); // Revalidate(update) the notes page
   }
   catch (error) {
     console.error('Error adding a new note', error);
