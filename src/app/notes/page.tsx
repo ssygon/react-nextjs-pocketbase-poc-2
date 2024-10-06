@@ -38,7 +38,9 @@ export default async function NotesPage() {
             ) : (
               <div className="flex flex-wrap gap-4">
               {notes.map((note) => (
-                  <Note key={note.id} id={note.id} title={note?.title} content={note?.content}/>
+                // Use {...note} spread to simplify passing in multiple props instead of:
+                // <Note key={note.id} id={note.id} title={note?.title} content={note?.content}/>
+                <Note key={note.id} {...note}/>
               ))}
           </div>
             )}
