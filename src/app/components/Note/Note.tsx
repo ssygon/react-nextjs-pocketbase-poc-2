@@ -1,6 +1,7 @@
 'use client';
 
 import { deleteNote } from "@/app/notes/actions";
+import IconTrash from '@/app/icons/icon-trash.svg';
 
 type NoteProps = {
   id: string;
@@ -29,12 +30,12 @@ const Note = ({
       <h2>{title}</h2>
       <p>{content}</p>
       <div className="flex justify-end mt-auto">
-        <button 
+      <button 
           onClick={handleDelete} 
           className="cursor-pointer"
           aria-label="Delete note"
         >
-          Delete
+          <IconTrash width={24} height={24} className="mt-4" />
         </button>
       </div>
     </div>
