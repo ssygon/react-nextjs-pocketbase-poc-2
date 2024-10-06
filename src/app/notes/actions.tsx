@@ -9,6 +9,11 @@ const db = new PocketBase(config.pocketbaseAPIBaseUrl);
 const notesCollection = db.collection('notes');
 const notesPath = "/notes";
 
+const ADD_NOTE_SUCCESS = 'Successfully added a new note';
+const ADD_NOTE_FAILED = 'Failed to add a new note';
+const DELETE_NOTE_SUCCESS = 'Successfully deleted a note';
+const DELETE_NOTE_FAILED = 'Failed to delete a note';
+
 // Checks if the PocketBase server is running
 const isPocketbaseServerOnline = async () => {
   try {
@@ -54,12 +59,25 @@ const addNote = async (data: any): Promise<{ status: boolean; message: string }>
   try {
     const status = await notesCollection.create(data);
     revalidatePath(notesPath); // Revalidate(update) the notes page
-    return { status: true, message: 'Note added successfully' };
+    return { status: true, message: ADD_NOTE_SUCCESS };
   }
   catch (error) {
-    console.error('Error adding a new note', error);
-    return { status: false, message: 'Failed to add note' };
+    console.error(ADD_NOTE_FAILED, error);
+    return { status: false, message: ADD_NOTE_FAILED };
   }
 };
 
-export { isPocketbaseServerOnline, getNotes, addNote };
+// Delete a note from the database
+const deleteNote = async (id: string) => {
+  try {
+    const status = await notesCollection.delete(id);
+    revalidatePath(notesPath); // Revalidate(update) the notes page
+    return { status: true, message: DELETE_NOTE_SUCCESS };
+  }
+  catch (error) {
+    console.error(DELETE_NOTE_FAILED, error);
+    return { status: false, message: DELETE_NOTE_FAILED };
+  }
+};
+
+export { isPocketbaseServerOnline, getNotes, addNote, deleteNote };
