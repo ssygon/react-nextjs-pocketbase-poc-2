@@ -16,15 +16,19 @@ function Note( { note }: any ) {
 }
 
 async function getNotes() {
-    // const res = await fetch('http://127.0.0.1:8090/api/collections/notes/records?page=1&perPage=30', { cache: 'no-store' });  // no-store is important
-    // const data = await res.json();
+  try {
+      // const res = await fetch('http://127.0.0.1:8090/api/collections/notes/records?page=1&perPage=30', { cache: 'no-store' });  // no-store is important
+      // const data = await res.json();
+      const db = new PocketBase('http://127.0.0.1:8090');
+      const data = await db.collection('notes').getList(1, 30, { cache: 'no-store' });
 
-    const db = new PocketBase('http://127.0.0.1:8090');
-    const data = await db.collection('notes').getList(1, 30, { cache: 'no-store' }); // no-store is important
+      console.log(data);
 
-    console.log(data);
-
-    return data?.items as any[];
+      return data?.items || [];
+    } catch (error) {
+      console.error('Error fetching notes:', error);
+      return [];
+    }    
 }
 
 
